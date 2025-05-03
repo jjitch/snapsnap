@@ -1,8 +1,9 @@
+mod snap;
+mod types;
+
 #[tauri::command]
 async fn one_time_shoot() -> tauri::ipc::Response {
-    let snap = snap::snap();
-    let _ts = snap.0;
-    let img = snap.1;
+    let img = snap::snap();
     tauri::ipc::Response::new(img)
 }
 
@@ -14,6 +15,3 @@ pub fn run() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-
-pub mod snap;
-pub mod types;
