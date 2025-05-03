@@ -1,12 +1,3 @@
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-pub struct TimeStamp(u64);
-
-impl TimeStamp {
-    pub fn new(ts: u64) -> Self {
-        TimeStamp(ts)
-    }
-}
-
 #[derive(Debug, Clone, PartialEq)]
 pub struct ImageBin(std::vec::Vec<u8>);
 
