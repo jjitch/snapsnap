@@ -1,22 +1,15 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
 import { Image } from "./Image";
 
 function App() {
-  const [imageData, setImageData] = useState<Uint8Array>(new Uint8Array());
   return (
     <main className="container">
-      <button
-        type="button"
-        onClick={() =>
-          invoke("one_time_shoot").then((res) =>
-            setImageData(res as Uint8Array),
-          )
-        }
-      >
-        Invoke Rust command
-      </button>
-      <Image png_binary={imageData} />
+      {Array.from({ length: 10 }).map((_, index) => (
+        // Suppress biome warning as this is a simple example
+        // biome-ignore lint/suspicious/noArrayIndexKey:
+        <div key={index}>
+          <Image timePoint={{ unix: index }} />
+        </div>
+      ))}
     </main>
   );
 }
