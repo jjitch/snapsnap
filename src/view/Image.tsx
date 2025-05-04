@@ -1,23 +1,21 @@
+import { useEffect, useState } from "react";
+import { apiClinet } from "api-client";
+import type { TimePoint } from "api-client/type";
+
 type ImageProps = {
-  png_binary: Uint8Array;
+  timePoint: TimePoint;
 };
 
 export function Image(props: ImageProps) {
-  if (!props.png_binary.length) {
-    return (
-      <div style={{ width: "100px", height: "100px", backgroundColor: "gray" }}>
-        No Image
-      </div>
-    );
-  }
-  const blob = new Blob([props.png_binary], { type: "image/png" });
-  const url = URL.createObjectURL(blob);
-  return (
-    <img
-      // src={`data:image/png;base64,${img_data}`}
-      src={url}
-      alt="Example"
-      style={{ width: "100px", height: "100px" }}
-    />
+  const [imgSource, setImgSource] = useState<string>("");
+  useEffect(() => {
+    apiClinet.fetchImageSource(props.timePoint).then((res) => {
+      setImgSource(res.src);
+    });
+  }, [props.timePoint]);
+  return imgSource.length > 0 ? (
+    <img src={imgSource} alt="Example" />
+  ) : (
+    <div>Loading...</div>
   );
 }
