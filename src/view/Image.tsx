@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { apiClinet } from "api-client";
-import type { TimePoint } from "api-client/type";
+import { apiClinet } from "@/api-client";
+import type { TimePoint } from "@/api-client/type";
 
 type ImageProps = {
   timePoint: TimePoint;
