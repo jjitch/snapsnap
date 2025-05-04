@@ -6,15 +6,46 @@ type ImageProps = {
   timePoint: TimePoint;
 };
 
+type FetchStateLoading = {
+  state: "loading";
+};
+
+type FetchStateSuccess = {
+  state: "success";
+  src: string;
+};
+
+type FetchStateError = {
+  state: "error";
+  msg: string;
+};
+
+type FetchState = FetchStateLoading | FetchStateSuccess | FetchStateError;
+
 export function Image(props: ImageProps) {
-  const [imgSource, setImgSource] = useState<string>("");
+  const [fetchState, setFetchState] = useState<FetchState>({
+    state: "loading",
+  });
   useEffect(() => {
-    apiClinet.fetchImageSource(props.timePoint).then((res) => {
-      setImgSource(res.src);
-    });
+    apiClinet
+      .fetchImageSource(props.timePoint)
+      .then((res) => {
+        setFetchState({
+          state: "success",
+          src: res.src,
+        });
+      })
+      .catch((err) => {
+        setFetchState({
+          state: "error",
+          msg: err.message,
+        });
+      });
   }, [props.timePoint]);
-  return imgSource.length > 0 ? (
-    <img src={imgSource} alt="Example" />
+  return fetchState.state === "success" ? (
+    <img src={fetchState.src} alt="Example" />
+  ) : fetchState.state === "error" ? (
+    <div>Error: {fetchState.msg}</div>
   ) : (
     <div>Loading...</div>
   );
