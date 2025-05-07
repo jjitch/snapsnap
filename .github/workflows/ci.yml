@@ -2,6 +2,8 @@ name: 'Publish SnapSnap'
 
 on:
   push:
+    tags:
+      - 'app-v*'
 
 jobs:
   publish-snapsnap:
