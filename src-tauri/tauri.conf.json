@@ -22,6 +22,7 @@
     }
   },
   "bundle": {
+    "createUpdaterArtifacts": true,
     "active": true,
     "targets": "msi",
     "icon": [
@@ -31,5 +32,16 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDhBRUE2N0ZEMjZCNUY1RkQKUldUOTliVW0vV2ZxaWswV1RSeUJqQkI2eXhnRC9mU29HcGRiYUxoMUs3SHpVMkhidzAxSTl1SGoK",
+      "endpoints": [
+        "https://github.com/jjitch/snapsnap/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "basicUi"
+      }
+    }
   }
 }
