@@ -1,4 +1,4 @@
-import type { Update, DownloadEvent } from "@tauri-apps/plugin-updater";
+import type { Update } from "@tauri-apps/plugin-updater";
 import { useState } from "react";
 
 export const Updater = (props: { update: Update }) => {

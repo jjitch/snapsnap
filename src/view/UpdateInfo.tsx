@@ -51,18 +51,6 @@ export const UpdateInfo = () => {
         });
       });
   }, []);
-  const createInstallProcess = (update: Update) => {
-    return () => {
-      update
-        .downloadAndInstall()
-        .then(() => {
-          console.log("Update downloaded and installed");
-        })
-        .catch((errorMsg) => {
-          console.error("Error downloading and installing update:", errorMsg);
-        });
-    };
-  };
   switch (updateInfo.type) {
     case "unfetched":
       return <div>Checking for updates...</div>;
