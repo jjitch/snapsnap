@@ -1,4 +1,4 @@
-mod snap;
+pub mod snap;
 mod types;
 
 #[tauri::command]
